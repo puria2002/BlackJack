@@ -17,7 +17,7 @@ def algorithm(hand, deck, method):
 
 
 # One iteration of the game
-def game():
+def game(method):
     player, house, deck = cards.start()
 
     timer = -1
@@ -29,7 +29,7 @@ def game():
             timer = 1
 
         # The house's turn (greedy AI)
-        house, deck, house_stop = algorithm(house, deck, NOTSOGREEDY)
+        house, deck, house_stop = algorithm(house, deck, method)
         house_last_settled = cards.settle(house, deck)
         if house_last_settled >= 0:
             timer = 1
@@ -60,7 +60,7 @@ def game():
 epoches = 10
 wins = 0
 for i in range(epoches):
-    wins += game()
+    wins += game(NOTSOGREEDY)
 print(wins/epoches)
 
     
