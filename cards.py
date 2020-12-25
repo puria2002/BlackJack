@@ -1,5 +1,12 @@
 import numpy.random
 
+# Global Constants
+BUST = 1
+WIN = 0
+UNDETERMINED = -1
+TARGET = 21
+
+
 #a simple class for game cards.
 #Suits are denoted by an integer 1-4 (corresponding to some permutation of heart, diamond, club, spade)
 #Ace corresponds to 1, King to 13
@@ -19,6 +26,7 @@ class Deck:
     def dealCard(self):
         dealtIndex = numpy.random.randint(0,len(self.deck))
         return self.deck.pop(dealtIndex)
+
 #hand of a given player
 class Hand:
     def __init__(self):
@@ -35,3 +43,40 @@ class Hand:
                 return 0
         #otherwise card is equally likely to be anything remaining
         return 1/(52 - len(self.hand))
+
+    # Sum of the cards in hand
+    def sum(self):
+        total = 0
+        for card in self.hand:
+            total += card.number
+        return total
+
+# Start game
+def start():
+    # Initialize the three parties
+    deck = Deck()
+    player = Hand()
+    house = Hand()
+
+    # Deal a card to each player in the game
+    player.addCard(deck.dealCard())
+    house.addCard(deck.dealCard())
+
+    return player, house, deck
+
+
+# Settle round and determine busts, etc.
+def settle(player, deck):
+    global BUST
+    global WIN
+    global UNDETERMINED
+    global TARGET
+
+    # Determine whether the player has busted or won
+    if player.sum > TARGET:
+        return BUST
+    if player.sum == TARGET:
+        return WIN
+    return UNDETERMINED
+
+
