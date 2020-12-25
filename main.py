@@ -32,7 +32,7 @@ elif player_last_settled == 0 or house_last_settled > 0:
 elif house_last_settled == 0:
     print("Player Lost")
 else:
-    if player.sum >= house.sum:
+    if player.sum() >= house.sum():
         print("Player Won")
     else:
         print("Player Lost")

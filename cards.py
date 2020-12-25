@@ -73,9 +73,9 @@ def settle(player, deck):
     global TARGET
 
     # Determine whether the player has busted or won
-    if player.sum > TARGET:
+    if player.sum() > TARGET:
         return BUST
-    if player.sum == TARGET:
+    if player.sum() == TARGET:
         return WIN
     return UNDETERMINED
 
