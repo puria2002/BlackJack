@@ -1,6 +1,6 @@
 import cards
 import greedy
-import player
+import players
 
 # Main method
 
@@ -9,7 +9,7 @@ player, house, deck = cards.start()
 timer = -1
 while timer < 0:
     # The player always goes first
-    player, deck, player_stop = player.algorithm(player, deck)
+    player, deck, player_stop = players.algorithm(player, deck)
     player_last_settled = cards.settle(player, deck)
     if player_last_settled >= 0:
         timer = 1
